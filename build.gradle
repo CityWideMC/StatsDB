@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
 }
 
 group 'com.github.CityWideMC'
@@ -7,8 +9,31 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.mysql:mysql-connector-j:8.0.31'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.CityWideMC'
+            artifactId = 'statsdb'
+            version = '1.0.0'
+
+            from components.java
+        }
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+wrapper {
+    gradleVersion = "7.6"
+    distributionType = Wrapper.DistributionType.ALL
 }
