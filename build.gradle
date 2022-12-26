@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.8.0-RC2'
 }
 
 group 'com.github.CityWideMC'
@@ -11,16 +10,5 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-}
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "18"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "18"
-    }
+    
 }
