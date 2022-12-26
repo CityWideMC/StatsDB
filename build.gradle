@@ -7,6 +7,9 @@ plugins {
 group 'com.github.CityWideMC'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = 18
+targetCompatibility = 18
+
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }

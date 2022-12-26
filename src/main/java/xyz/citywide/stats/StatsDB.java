@@ -25,24 +25,23 @@ public class StatsDB {
         System.out.println(getTime(uuid));*/
     }
 
-    public int getTime(String uuid) {
+    public ResultSet getValue(String uuid) {
         try {
-            data = command.executeQuery("SELECT * from " + table + " WHERE uuid = " + "\"" + uuid + "\"");
-            data.next();
-            return data.getInt("time");
+            data = command.executeQuery("SELECT " + "value" + " from " + table + " WHERE uuid = " + "\"" + uuid + "\"");
+            return data;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean setTime(String uuid, int time) {
+    public boolean setValue(String uuid, int value) {
         boolean exists = false;
         try {
-            data = command.executeQuery("SELECT * from " + table + " WHERE EXISTS (SELECT uuid FROM " + table + " WHERE uuid = \"" + uuid + "\")");
+            data = command.executeQuery("SELECT " + "value" +  " from " + table + " WHERE EXISTS (SELECT uuid FROM " + table + " WHERE uuid = \"" + uuid + "\")");
             exists = data.next();
             if(exists) {
-                command.execute("UPDATE " + table + " SET time = " + time + " WHERE uuid = \"" + uuid + "\"");
+                command.execute("UPDATE " + table + " SET " + "value" + " = " + value + " WHERE uuid = \"" + uuid + "\"");
             } else {
-                command.execute("INSERT INTO " + table + " (uuid, time) VALUES (\"" + uuid + "\", " + time + ")");
+                command.execute("INSERT INTO " + table + " (uuid, value) VALUES (\"" + uuid + "\", " + value + ")");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
